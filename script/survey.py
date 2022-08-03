@@ -104,7 +104,8 @@ class mainwindow:
         self.label = tk.Label(self.master, text="THANK YOU \n %s  !" %(name), font=fontStyle2)
         self.label.place(relx = 0.5, rely= 0.5, anchor=CENTER) 
 
-
+#make the window unexpandeable
+root.resizable(False,False)
 #set default window as mainwindow and run
 mainwindow(root)
 root.mainloop()
