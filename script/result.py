@@ -1,99 +1,107 @@
-import matplotlib.pyplot as plt
-import numpy as np
+from msilib.schema import Error
+from sqlite3 import connect
+import matplotlib
+import matplotlib.animation as animation
+from matplotlib import style
 import mysql.connector
-import pandas.io.sql as sql
-from getpass import getpass
 from mysql.connector import connect, Error
-from pymysql import *
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
 
 
+#style.use('fivethirtyeight')
+fig = plt.figure()
+ax = fig.add_subplot(1,1,1)
 
-connection = connect(host="xxxxxxxxx",database = "SURVEY_DATA",user="xxxx",password="xxxxxxxxx",)
-print(connection)
+#Function to make the chart live
+def animate(i):
+    connection = connect(host="xxxxxxxxx",database = "SURVEY_DATA",user="xxxx",password="xxxxxxxxx",)
+    print(connection)
+    cursor = connection.cursor()
 
-cursor = connection.cursor()
+    lecturehall = ['LectureHallOne', 'LectureHallTwo']
 
-hall = ['LectureHallOne', 'LectureHallTwo']
-
-l1 = []
-l2 = []
-l3 = []
-l4 = []
-
-
-level1h = """SELECT lecturehall FROM RESPONSE WHERE level = 1"""
-cursor.execute(level1h)
-msg9 = cursor.fetchall()
-counth1 = 0
-counth2 = 0
-for i in msg9:
-    if i == ('LectureHallOne',):
-        counth1 = counth1 + 1
-    elif i == ('LectureHallTwo',):
-        counth2 = counth2 + 1
-
-l1.append(counth1)
-l1.append(counth2)
-
-level2h = """SELECT lecturehall FROM RESPONSE WHERE level = 2"""
-cursor.execute(level2h)
-msg2 = cursor.fetchall()
-counth2 = 0
-counth22 = 0
-for i in msg2:
-    if i == ('LectureHallOne',):
-        counth2 = counth2 + 1
-    elif i == ('LectureHallTwo',):
-        counth22 = counth22 + 1
-
-l2.append(counth1)
-l2.append(counth22)
-
-level3h = """SELECT lecturehall FROM RESPONSE WHERE level = 3"""
-cursor.execute(level3h)
-msg3 = cursor.fetchall()
-counth3 = 0
-counth33 = 0
-for i in msg3:
-    if i == ('LectureHallOne',):
-        counth3 = counth3 + 1
-    elif i == ('LectureHallTwo',):
-        counth33 = counth33 + 1
-
-l3.append(counth3)
-l3.append(counth33)
-
-level4h = """SELECT lecturehall FROM RESPONSE WHERE level = 4"""
-cursor.execute(level4h)
-msg4 = cursor.fetchall()
-counth4 = 0
-counth44 = 0
-for i in msg4:
-    if i == ('LectureHallOne',):
-        counth4 = counth4 + 1
-    elif i == ('LectureHallTwo',):
-        counth44 = counth44 + 1
-
-l4.append(counth4)
-l4.append(counth44)
-
-print(l1)
-print(l2)
-print(l3)
-print(l4)
-
-l11 = np.array(l1)
-l22 = np.array(l2)
-l33 = np.array(l3)
-l44 = np.array(l4)
+    level1 = []
+    level2 = []
+    level3 = []
+    level4 = []
 
 
-w = 0.4
+    levelonehall = """SELECT lecturehall FROM RESPONSE WHERE level = 1"""
+    cursor.execute(levelonehall)
+    halloutputl1 = cursor.fetchall()
+    l1count1 = 0
+    l1count2 = 0
+    for hall in halloutputl1:
+        if hall == ('LectureHallOne',):
+            l1count1 = l1count1 + 1
+        elif hall == ('LectureHallTwo',):
+            l1count2 = l1count2 + 1
 
-plt.bar(hall, l11, w, label="Level 1")
-plt.bar(hall, l22, w, bottom=l11, label="Level 2")
-plt.bar(hall, l33, w, bottom=l11+l22, label="Level 3")
-plt.bar(hall, l44, w, bottom=l11+l22+l33, label="Level 4")
+    level1.append(l1count1)
+    level1.append(l1count2)
 
-plt.legend()
+    leveltwohall = """SELECT lecturehall FROM RESPONSE WHERE level = 2"""
+    cursor.execute(leveltwohall)
+    halloutputl2 = cursor.fetchall()
+    l2count1 = 0
+    l2count2 = 0
+    for hall in halloutputl2:
+        if hall == ('LectureHallOne',):
+            l2count1 = l2count1 + 1
+        elif hall == ('LectureHallTwo',):
+            l2count2 = l2count2 + 1
+
+    level2.append(l2count1)
+    level2.append(l2count2)
+
+    levelthreehall = """SELECT lecturehall FROM RESPONSE WHERE level = 3"""
+    cursor.execute(levelthreehall)
+    halloutputl3 = cursor.fetchall()
+    l3count1 = 0
+    l3count2 = 0
+    for hall in halloutputl3:
+        if hall == ('LectureHallOne',):
+            l3count1 = l3count1 + 1
+        elif hall == ('LectureHallTwo',):
+            l3count2 = l3count2 + 1
+
+    level3.append(l3count1)
+    level3.append(l3count2)
+
+    levelfourhall = """SELECT lecturehall FROM RESPONSE WHERE level = 4"""
+    cursor.execute(levelfourhall)
+    halloutputl4 = cursor.fetchall()
+    l4count1 = 0
+    l4count2 = 0
+    for hall in halloutputl4:
+        if hall == ('LectureHallOne',):
+            l4count1 = l4count1 + 1
+        elif hall == ('LectureHallTwo',):
+            l4count2 = l4count2 + 1
+
+    level4.append(l4count1)
+    level4.append(l4count2)
+
+    print(level1)
+    print(level2)
+    print(level3)
+    print(level4)
+
+    levelone = np.array(level1)
+    leveltwo = np.array(level2)
+    levelthree = np.array(level3)
+    levelfour = np.array(level4)
+
+    w = 0.4
+
+    ax.clear()
+    plt.bar(lecturehall, levelone, w, label='Level 1')
+    plt.bar(lecturehall, leveltwo, w, bottom=levelone, label='Level 2')
+    plt.bar(lecturehall, levelthree, w, bottom=levelone+leveltwo, label='Level 3')
+    plt.bar(lecturehall, levelfour, w, bottom=levelone+leveltwo+levelthree, label='Level 4')
+    plt.legend()
+
+ani = animation.FuncAnimation(fig, animate, interval=1000)
 plt.show()
