@@ -1,13 +1,11 @@
-from msilib.schema import Error
-from sqlite3 import connect
 import matplotlib
 import matplotlib.animation as animation
 from matplotlib import style
+import matplotlib.pyplot as plt
+import numpy as np
 import mysql.connector
 from mysql.connector import connect, Error
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
 
 
 #style.use('fivethirtyeight')
