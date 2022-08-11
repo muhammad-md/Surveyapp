@@ -5,9 +5,6 @@ import mysql.connector
 from mysql.connector import connect, Error
 import numpy as np
 
-
-
-
 #style.use('fivethirtyeight')
 fig = plt.figure()
 ax = fig.add_subplot(1,1,1)
@@ -19,12 +16,10 @@ def animate(i):
     cursor = connection.cursor()
 
     lecturehall = ['LectureHallOne', 'LectureHallTwo']
-
     level1 = []
     level2 = []
     level3 = []
     level4 = []
-
 
     levelonehall = """SELECT lecturehall FROM RESPONSE WHERE level = 1"""
     cursor.execute(levelonehall)
@@ -92,13 +87,11 @@ def animate(i):
     levelthree = np.array(level3)
     levelfour = np.array(level4)
 
-    w = 0.4
-
     ax.clear()
-    plt.bar(lecturehall, levelone, w, label='Level 1')
-    plt.bar(lecturehall, leveltwo, w, bottom=levelone, label='Level 2')
-    plt.bar(lecturehall, levelthree, w, bottom=levelone+leveltwo, label='Level 3')
-    plt.bar(lecturehall, levelfour, w, bottom=levelone+leveltwo+levelthree, label='Level 4')
+    plt.bar(lecturehall, levelone, 0.4, label='Level 1')
+    plt.bar(lecturehall, leveltwo, 0.4, bottom=levelone, label='Level 2')
+    plt.bar(lecturehall, levelthree, 0.4, bottom=levelone+leveltwo, label='Level 3')
+    plt.bar(lecturehall, levelfour, 0.4, bottom=levelone+leveltwo+levelthree, label='Level 4')
     plt.legend()
 
 ani = animation.FuncAnimation(fig, animate, interval=1000)
