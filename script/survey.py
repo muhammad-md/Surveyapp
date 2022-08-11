@@ -12,7 +12,7 @@ from pymysql import *
 
 
 #connecting mysql database
-connection = connect(host="localhost",database = "SURVEY_DATA",user="root",password="55+DAta#3",)
+connection = connect(host="xxxxxxxxx",database = "SURVEY_DATA",user="xxxx",password="xxxxxxxxx",)
 print(connection)
 
 #for executing sql operations
