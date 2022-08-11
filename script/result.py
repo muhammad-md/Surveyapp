@@ -1,11 +1,11 @@
-import matplotlib
 import matplotlib.animation as animation
 from matplotlib import style
 import matplotlib.pyplot as plt
 import mysql.connector
 from mysql.connector import connect, Error
 import numpy as np
-import pandas as pd
+
+
 
 
 #style.use('fivethirtyeight')
@@ -14,7 +14,7 @@ ax = fig.add_subplot(1,1,1)
 
 #Function to make the chart live
 def animate(i):
-    connection = connect(host="xxxxxxxxx",database = "SURVEY_DATA",user="xxxx",password="xxxxxxxxx",)
+    connection = connect(host="localhost",database = "SURVEY_DATA",user="root",password="55+DAta#3",)
     print(connection)
     cursor = connection.cursor()
 
