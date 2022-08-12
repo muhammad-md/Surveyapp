@@ -11,8 +11,8 @@ ax = fig.add_subplot(1,1,1)
 
 #Function to make the chart live
 def animate(i):
-    connection = connect(host="xxxxxxxxx",database = "SURVEY_DATA",user="xxxx",password="xxxxxxxxx",)
-    print(connection)
+    connection = connect(host="localhost",database = "SURVEY_DATA",user="root",password="55+DAta#3",)
+    #print(connection)
     cursor = connection.cursor()
 
     lecturehall = ['LectureHallOne', 'LectureHallTwo']
@@ -77,10 +77,10 @@ def animate(i):
     level4.append(l4count1)
     level4.append(l4count2)
 
-    print(level1)
-    print(level2)
-    print(level3)
-    print(level4)
+    #print(level1)
+    #print(level2)
+    #print(level3)
+    #print(level4)
 
     levelone = np.array(level1)
     leveltwo = np.array(level2)

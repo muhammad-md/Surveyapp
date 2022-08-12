@@ -11,8 +11,8 @@ from mysql.connector import connect, Error
 from pymysql import *
 
 #connecting mysql database
-connection = connect(host="xxxxxxxxx",database = "SURVEY_DATA",user="xxxx",password="xxxxxxxxx",)
-print(connection)
+connection = connect(host="localhost",database = "SURVEY_DATA",user="root",password="55+DAta#3",)
+#print(connection)
 
 #for executing sql operations
 cursor = connection.cursor()
@@ -74,7 +74,7 @@ class mainwindow:
         
         namelist = list()   #list to save the current user name
         def getvariables():
-            name = str(entry1.get())
+            name = (entry1.get())
             namelist.append(name)
             day = menu2.get()
             level = int(menu3.get())
@@ -85,7 +85,7 @@ class mainwindow:
             value = (name,)
             cursor.execute(username, value)
             usernameoutput = cursor.fetchall()
-            print(usernameoutput)
+            #print(usernameoutput)
 
             userdept = """SELECT department FROM response WHERE name = %s"""
             value = (name,)
@@ -96,7 +96,7 @@ class mainwindow:
                     dept = dept
             else:
                 dept = "none"
-            print(userdeptoutput)
+            #print(userdeptoutput)
 
             userlevel = """SELECT level FROM response WHERE name = %s"""
             value = (name,)
@@ -107,18 +107,17 @@ class mainwindow:
                     lev = lev
             else:
                 lev = "none"
-            print(userleveloutput)
+            #print(userleveloutput)
             
             #check if the current user has already participated by checking his/her name, department and level. 
             #if present in the database, then he cannot submit again, if not found in the database
             #if not present in the database, then add the user inputs to the database 
             if dept == (department,) and lev == (level,) and len(usernameoutput) >= 1:
                 messagebox.showinfo("", "Thank you %s ! You have Already participated in this survey" %(name))
-                print("THIS USER ALREADY EXISTS")
+                #print("THIS USER ALREADY EXISTS")
             else:
                 cursor.execute("INSERT INTO RESPONSE (name, day, level, department, lecturehall) VALUES ('%s', '%s', '%s', '%s', '%s')" % (name, day, level, department, lecturehall))
                 connection.commit()
-                print("DOOOOOOOOOOOOOOOOOOOOOOOOO")
         
         #function to clear the page(make it empty) and shows a message to trh user
         def clearpage():
