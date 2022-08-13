@@ -16,11 +16,12 @@ def animate(i):
     cursor = connection.cursor()
 
     lecturehall = ['LectureHallOne', 'LectureHallTwo']
-    level1 = []
-    level2 = []
-    level3 = []
-    level4 = []
-
+    level1 = [0, 0]
+    level2 = [0, 0]
+    level3 = [0, 0]
+    level4 = [0, 0]
+    
+    #getting the number of peoples that are in level one from the database and inserting the number in the list
     levelonehall = """SELECT lecturehall FROM RESPONSE WHERE level = 1"""
     cursor.execute(levelonehall)
     halloutputl1 = cursor.fetchall()
@@ -32,9 +33,20 @@ def animate(i):
         elif hall == ('LectureHallTwo',):
             l1count2 = l1count2 + 1
 
-    level1.append(l1count1)
-    level1.append(l1count2)
+    #check if licount and l1count2 are 0 or greater than 0 to insert them in thier position in the list        
+    if l1count1 != 0 and l1count2 != 0:
+        del level1[0]
+        level1.insert(0, l1count1)
+        del level1[1]
+        level1.insert(1, l1count2)
+    elif l1count1 != 0 and l1count2 == 0:
+        del level1[0]
+        level1.insert(0, l1count1)
+    elif l1count1 == 0 and l1count2 != 0:
+        del level1[1]
+        level1.insert(1, l1count2)
 
+    #getting the number of peoples that are in level one from the database and inserting the number in the list
     leveltwohall = """SELECT lecturehall FROM RESPONSE WHERE level = 2"""
     cursor.execute(leveltwohall)
     halloutputl2 = cursor.fetchall()
@@ -45,10 +57,21 @@ def animate(i):
             l2count1 = l2count1 + 1
         elif hall == ('LectureHallTwo',):
             l2count2 = l2count2 + 1
+    
+    #check if licount and l1count2 are 0 or greater than 0 to insert them in thier position in the list   
+    if l2count1 != 0 and l2count2 != 0:
+        del level2[0]
+        level2.insert(0, l2count1)
+        del level2[1]
+        level2.insert(1, l2count2)
+    elif l2count1 != 0 and l2count2 == 0:
+        del level2[0]
+        level2.insert(0, l2count1)
+    elif l2count1 == 0 and l2count2 != 0:
+        del level2[1]
+        level2.insert(1, l2count2)
 
-    level2.append(l2count1)
-    level2.append(l2count2)
-
+    #getting the number of peoples that are in level one from the database and inserting the number in the list
     levelthreehall = """SELECT lecturehall FROM RESPONSE WHERE level = 3"""
     cursor.execute(levelthreehall)
     halloutputl3 = cursor.fetchall()
@@ -59,10 +82,21 @@ def animate(i):
             l3count1 = l3count1 + 1
         elif hall == ('LectureHallTwo',):
             l3count2 = l3count2 + 1
-
-    level3.append(l3count1)
-    level3.append(l3count2)
-
+    
+    #check if licount and l1count2 are 0 or greater than 0 to insert them in thier position in the list   
+    if l3count1 != 0 and l3count2 != 0:
+        del level3[0]
+        level3.insert(0, l3count1)
+        del level3[1]
+        level3.insert(1, l3count2)
+    elif l3count1 != 0 and l3count2 == 0:
+        del level3[0]
+        level3.insert(0, l3count1)
+    elif l3count1 == 0 and l3count2 != 0:
+        del level3[1]
+        level3.insert(1, l3count2)
+    
+    #getting the number of peoples that are in level one from the database and inserting the number in the list
     levelfourhall = """SELECT lecturehall FROM RESPONSE WHERE level = 4"""
     cursor.execute(levelfourhall)
     halloutputl4 = cursor.fetchall()
@@ -73,9 +107,19 @@ def animate(i):
             l4count1 = l4count1 + 1
         elif hall == ('LectureHallTwo',):
             l4count2 = l4count2 + 1
-
-    level4.append(l4count1)
-    level4.append(l4count2)
+    
+    #check if licount and l1count2 are 0 or greater than 0 to insert them in thier position in the list   
+    if l4count1 != 0 and l4count2 != 0:
+        del level4[0]
+        level4.insert(0, l4count1)
+        del level4[1]
+        level4.insert(1, l4count2)
+    elif l4count1 != 0 and l4count2 == 0:
+        del level4[0]
+        level4.insert(0, l4count1)
+    elif l4count1 == 0 and l4count2 != 0:
+        del level4[1]
+        level4.insert(1, l4count2)
 
     #print(level1)
     #print(level2)
