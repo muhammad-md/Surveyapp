@@ -11,7 +11,7 @@ from mysql.connector import connect, Error
 from pymysql import *
 
 #connecting mysql database
-connection = connect(host="xxxxxxxxx",database = "SURVEY_DATA",user="xxxx",password="xxxxxxxxx",)
+connection = connect(host="xxxxxxxxx",database = "SURVEY_DATA",user="xxxx",password="xxxxxxxxx")
 #print(connection)
 
 #for executing sql operations

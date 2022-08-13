@@ -11,7 +11,7 @@ ax = fig.add_subplot(1,1,1)
 
 #Function to make the chart live
 def animate(i):
-    connection = connect(host="xxxxxxxx",database = "SURVEY_DATA",user="xxxx",password="xxxxxxxxx",)
+    connection = connect(host="xxxxxxxx",database = "SURVEY_DATA",user="xxxx",password="xxxxxxxxx")
     #print(connection)
     cursor = connection.cursor()
 
