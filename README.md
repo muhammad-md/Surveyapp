@@ -8,9 +8,10 @@ A Survey Software that collects data, insert into a MySQL database and visualize
 
 ## Running
 * Create a MySQL database named "SURVEY_DATA" ``CREATE DATABASE `SURVEY_DATA`;``
-* Create a table named "RESPONSE" `create table RESPONSE (name varchar(20), day varchar(14), level int(2), department varchar(14), lecturehall varchar(15));`
-* open the two scripts and substitute in the connection your database localhost, user and password
- ![image](https://user-images.githubusercontent.com/78704553/184498245-2f99800f-dae4-42c6-8a3b-310aa9f5929d.png)
+* Create a table in the database "SURVEY_DATA" named "RESPONSE" `create table RESPONSE (name varchar(20), day varchar(14), level int(2), department varchar(14), lecturehall varchar(15));`
+* open the two scripts and substitute in the connection your database lhost, user and password
+
+![img](https://user-images.githubusercontent.com/78704553/184507039-bbcbda74-2d1a-415c-a392-24e30dc7718e.png)
 
 
 ## Demo
