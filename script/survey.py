@@ -5,8 +5,8 @@ from tkinter import messagebox
 from mysql.connector import connect
 
 #connecting mysql database
-connection = connect(host="xxxxxxxxx",database = "xxxxxxxxx",user="xxxx",password="xxxxxxxxx")
-#print(connection)
+connection = connect(host="localhost",database = "SURVEY_DATA",user="root",password="55+DAta#3")
+print(connection)
 
 #for executing sql operations
 cursor = connection.cursor()
@@ -15,65 +15,67 @@ cursor = connection.cursor()
 window = Tk()
 window.title("SURVEY FORM")
 window.configure(width=600, height=900)
-fontStyle = tkFont.Font(family="Candara", size=13)
-fontStyle1 = tkFont.Font(family="Candara", size=14)
+fontStyle1 = tkFont.Font(family="Candara", size=13)
+fontStyle2 = tkFont.Font(family="Candara", size=22)
+
+#list to save the current user name
+namelist = []
 
 class mainwindow:
     def __init__(self, master):
         self.master = master
 
-        label = tk.Label(self.master, text="This survey is carried out to know the lecture hall that is mostly used between \n LectureHallOne and LectureHallTwo. This survey would also be \n used to find out the level of students that uses it the most", font=fontStyle)
-        label.place(relx = 0.5, rely = 0.05, anchor = CENTER)
+        self.label = tk.Label(self.master, text="This survey is carried out to know the lecture hall that is mostly used between \n LectureHallOne and LectureHallTwo. This survey would also be \n used to find out the level of students that uses it the most", font=fontStyle1)
+        self.label.place(relx = 0.5, rely = 0.05, anchor = CENTER)
 
-        button = tk.Button(self.master, text="Submit", font=fontStyle1, command=lambda: [getvariables(), clearpage()])
-        button.place(relx = 0.5, rely = 0.70, anchor=CENTER)
+        self.button = tk.Button(self.master, text="Submit", font=fontStyle1, command=lambda: [getvariables(), self.clearpage()])
+        self.button.place(relx = 0.5, rely = 0.70, anchor=CENTER)
         
-        label1 = tk.Label(self.master, text='Name: ', font=fontStyle1)
-        label1.place(relx = 0.2, rely = 0.20, anchor=CENTER)
+        self.label1 = tk.Label(self.master, text='Name: ', font=fontStyle1)
+        self.label1.place(relx = 0.2, rely = 0.20, anchor=CENTER)
         #Create an Entry box to enter name
-        entry1= tk.Entry(self.master)
-        entry1.place(relx = 0.5, rely = 0.20, anchor=CENTER, width=150,height=40)
+        self.entry1= tk.Entry(self.master)
+        self.entry1.place(relx = 0.5, rely = 0.20, anchor=CENTER, width=150,height=40)
 
-        label2 = tk.Label(self.master, text='Day: ', font=fontStyle1)
-        label2.place(relx = 0.2, rely = 0.30, anchor=CENTER)
-        menu2= StringVar(self.master)
-        menu2.set("Select Day")
+        self.label2 = tk.Label(self.master, text='Day: ', font=fontStyle1)
+        self.label2.place(relx = 0.2, rely = 0.30, anchor=CENTER)
+        self.menu2= StringVar(self.master)
+        self.menu2.set("Select Day")
         #Create a dropdown Menu
-        drop2= tk.OptionMenu(self.master, menu2, "Monday", "Tuesday","Wednesday","Thursday","Friday")
-        drop2.place(relx = 0.5, rely = 0.30, anchor=CENTER, width=150,height=40)
+        self.drop2= tk.OptionMenu(self.master, self.menu2, "Monday", "Tuesday","Wednesday","Thursday","Friday")
+        self.drop2.place(relx = 0.5, rely = 0.30, anchor=CENTER, width=150,height=40)
         
-        label3 = tk.Label(self.master, text='Level: ', font=fontStyle1)
-        label3.place(relx = 0.2, rely = 0.40, anchor=CENTER)
-        menu3= StringVar(self.master)
-        menu3.set("Select Level")
+        self.label3 = tk.Label(self.master, text='Level: ', font=fontStyle1)
+        self.label3.place(relx = 0.2, rely = 0.40, anchor=CENTER)
+        self.menu3= StringVar(self.master)
+        self.menu3.set("Select Level")
         #Create a dropdown Menu
-        drop3= tk.OptionMenu(self.master, menu3, 1, 2,3,4)
-        drop3.place(relx = 0.5, rely = 0.40, anchor=CENTER, width=150,height=40)
+        self.drop3= tk.OptionMenu(self.master, self.menu3, 1, 2,3,4)
+        self.drop3.place(relx = 0.5, rely = 0.40, anchor=CENTER, width=150,height=40)
 
-        label4 = tk.Label(self.master, text='Department: ', font=fontStyle1)
-        label4.place(relx = 0.2, rely = 0.50, anchor=CENTER)
-        menu4= StringVar(self.master)
-        menu4.set("Select Department")
+        self.label4 = tk.Label(self.master, text='Department: ', font=fontStyle1)
+        self.label4.place(relx = 0.2, rely = 0.50, anchor=CENTER)
+        self.menu4= StringVar(self.master)
+        self.menu4.set("Select Department")
         #Create a dropdown Menu
-        drop4= tk.OptionMenu(self.master, menu4, "Statistics", "Computer","Mathematics","IT")
-        drop4.place(relx = 0.5, rely = 0.50, anchor=CENTER, width=150,height=40)
+        self.drop4= tk.OptionMenu(self.master, self.menu4, "Statistics", "Computer","Mathematics","IT")
+        self.drop4.place(relx = 0.5, rely = 0.50, anchor=CENTER, width=150,height=40)
 
-        label5 = tk.Label(self.master, text='LectureHall: ', font=fontStyle1)
-        label5.place(relx = 0.2, rely = 0.60, anchor=CENTER)
-        menu5= StringVar(self.master)
-        menu5.set("Select LectureHall")
+        self.label5 = tk.Label(self.master, text='LectureHall: ', font=fontStyle1)
+        self.label5.place(relx = 0.2, rely = 0.60, anchor=CENTER)
+        self.menu5= StringVar(self.master)
+        self.menu5.set("Select LectureHall")
         #Create a dropdown Menu
-        drop5= tk.OptionMenu(self.master, menu5, "LectureHallOne", "LectureHallTwo")
-        drop5.place(relx = 0.5, rely = 0.60, anchor=CENTER, width=150,height=40)
+        self.drop5= tk.OptionMenu(self.master, self.menu5, "LectureHallOne", "LectureHallTwo")
+        self.drop5.place(relx = 0.5, rely = 0.60, anchor=CENTER, width=150,height=40)
         
-        namelist = list()   #list to save the current user name
         def getvariables():
-            name = (entry1.get())
+            name = (self.entry1.get())
             namelist.append(name)
-            day = menu2.get()
-            level = int(menu3.get())
-            department = menu4.get()
-            lecturehall = menu5.get()
+            day = self.menu2.get()
+            level = int(self.menu3.get())
+            department = self.menu4.get()
+            lecturehall = self.menu5.get()
 
             username = """SELECT name FROM response WHERE name = %s"""
             value = (name,)
@@ -97,7 +99,7 @@ class mainwindow:
             cursor.execute(userlevel, value)
             userleveloutput = cursor.fetchall()
             if len(userleveloutput) > 0:
-                for lev in userleveloutput:
+                for lev in userleveloutput:               #lev means level
                     lev = lev
             else:
                 lev = "none"
@@ -113,27 +115,24 @@ class mainwindow:
                 cursor.execute("INSERT INTO RESPONSE (name, day, level, department, lecturehall) VALUES ('%s', '%s', '%s', '%s', '%s')" % (name, day, level, department, lecturehall))
                 connection.commit()
         
-        #function to clear the page(make it empty) and shows a message to trh user
-        def clearpage():
-            button.destroy()
-            label.destroy()
-            label1.destroy()
-            label2.destroy()
-            label3.destroy()
-            label4.destroy()
-            label5.destroy()
-            entry1.destroy()
-            drop2.destroy()
-            drop3.destroy()
-            drop4.destroy()
-            drop5.destroy()
+    #function to clear the page(make it empty) and shows a message to trh user
+    def clearpage(self):
+        self.button.destroy()
+        self.label.destroy()
+        self.label1.destroy()
+        self.label2.destroy()
+        self.label3.destroy()
+        self.label4.destroy()
+        self.label5.destroy()
+        self.entry1.destroy()
+        self.drop2.destroy()
+        self.drop3.destroy()
+        self.drop4.destroy()
+        self.drop5.destroy()
 
-            fontStyle2 = tkFont.Font(family="Candara", size=22)
-            for name in namelist:
-                name = name.upper()
-        
-            label6 = tk.Label(self.master, text="THANK YOU \n %s  !" %(name), font=fontStyle2)
-            label6.place(relx = 0.5, rely= 0.5, anchor=CENTER) 
+        name = namelist[0].upper()
+        label6 = tk.Label(self.master, text="THANK YOU \n %s  !" %(name), font=fontStyle2)
+        label6.place(relx = 0.5, rely= 0.5, anchor=CENTER) 
 
 #make window unexpandable(fixed)
 window.resizable(False,False)
