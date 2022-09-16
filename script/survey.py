@@ -1,17 +1,11 @@
-from multiprocessing import connection
 import tkinter as tk
 import tkinter.font as tkFont
 from tkinter import *
-from tkinter.ttk import *
-from tkinter import filedialog as fd
 from tkinter import messagebox
-from tkinter.messagebox import showinfo
-from getpass import getpass
-from mysql.connector import connect, Error
-from pymysql import *
+from mysql.connector import connect
 
 #connecting mysql database
-connection = connect(host="xxxxxxxxx",database = "SURVEY_DATA",user="xxxx",password="xxxxxxxxx")
+connection = connect(host="localhost",database = "SURVEY_DATA",user="root",password="55+DAta#3")
 #print(connection)
 
 #for executing sql operations
